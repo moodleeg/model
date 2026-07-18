@@ -1,0 +1,20 @@
+# Protect sensitive files
+<FilesMatch "^(config\.php|db\.sql|.*\.log|.*\.bat|pseudo_cron\.php|auth\.php|Mailer\.php|MoodleScraper\.php)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Allow API files from anywhere
+<FilesMatch "^(checker_api|sync_api|ping)\.php$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Disable directory listing
+Options -Indexes
+
+# PHP settings
+<IfModule mod_php.c>
+    php_value max_execution_time 600
+    php_value memory_limit 256M
+</IfModule>
